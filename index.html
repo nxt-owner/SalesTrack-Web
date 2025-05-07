@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Tech Lasiya | techlasiya.com" />
+  <meta name="description" content="Track your daily sales progress and monthly targets easily with the Sales Target Tracker app." />
+  <meta name="keywords" content="sales tracker, monthly sales, target tracking, daily sales log, sales app, productivity" />
+  <meta name="theme-color" content="#4CAF50" />
+
+  <meta property="og:title" content="Sales Target Tracker - Stay on Top of Your Goals" />
+  <meta property="og:description" content="Achieve your sales goals with this easy-to-use sales tracking app." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://salseapp-4de3b.firebaseapp.com/" />
+  <meta property="og:image" content="https://salseapp-4de3b.firebaseapp.com/assets/og-image.png" />
+
+  <meta http-equiv="Content-Security-Policy" 
+      content="frame-src https://salseapp-4de3b.firebaseapp.com 
+               https://*.firebaseapp.com 
+               https://*.firebase.com;
+               child-src 'self' https://*.firebaseapp.com;">
+
+  <link rel="canonical" href="https://salseapp-4de3b.firebaseapp.com/" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <title>Sales Target Tracker - Stay on Top of Your Monthly Sales</title>
+</head>
+
+<body>
+  <!-- Auth Modal -->
+  <div class="auth-modal" id="authModal">
+    <div class="auth-container">
+      <button class="close-auth" id="closeAuth">&times;</button>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="loginTab">Login</button>
+        <button class="auth-tab" id="signupTab">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <div class="auth-form active" id="loginForm">
+        <h2>Login to Your Account</h2>
+        <div id="loginError" class="error-message"></div>
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password">
+        <div class="forgot-password">
+          <a href="#" id="forgotPassword">Forgot password?</a>
+        </div>
+        <button onclick="login()">Login</button>
+        <div class="auth-divider">or</div>
+        <button class="google-btn" onclick="googleLogin()">
+          <i class="fab fa-google"></i> Login with Google
+        </button>
+      </div>
+
+      <!-- Signup Form -->
+      <div class="auth-form" id="signupForm">
+        <h2>Create New Account</h2>
+        <div id="signupError" class="error-message"></div>
+        <label for="signupName">Name</label>
+        <input type="text" id="signupName" placeholder="Enter your name">
+        <label for="signupEmail">Email</label>
+        <input type="email" id="signupEmail" placeholder="Enter your email">
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" placeholder="Create a password">
+        <label for="signupConfirmPassword">Confirm Password</label>
+        <input type="password" id="signupConfirmPassword" placeholder="Confirm your password">
+        <button onclick="signup()">Sign Up</button>
+        <div class="auth-divider">or</div>
+        <button class="google-btn" onclick="googleLogin()">
+          <i class="fab fa-google"></i> Sign Up with Google
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Password Reset Modal -->
+  <div class="auth-modal" id="resetModal" style="display: none;">
+    <div class="auth-container">
+      <button class="close-auth" id="closeReset">&times;</button>
+      <h2>Reset Password</h2>
+      <div id="resetError" class="error-message"></div>
+      <label for="resetEmail">Email</label>
+      <input type="email" id="resetEmail" placeholder="Enter your email">
+      <button onclick="sendPasswordReset()">Send Reset Link</button>
+    </div>
+  </div>
+
+  <!-- Main App (hidden until authenticated) -->
+  <div class="app-container" id="appContainer">
+    <div class="app-header">
+      <h1 class="app-title">Monthly Sales Tracker</h1>
+      <div class="user-menu">
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          alt="User Avatar" class="user-avatar" id="userAvatar">
+        <div class="profile-dropdown" id="profileDropdown">
+          <p id="dropdownName">Loading...</p>
+          <p id="dropdownEmail">Loading...</p>
+          <button onclick="openProfileModal()">Profile Settings</button>
+          <button onclick="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- Sales Form Section (updated) -->
+      <div class="sales-form">
+        <h2>Monthly Sales Data</h2>
+
+        <div class="calendar-controls">
+          <select id="yearSelect">
+            <!-- Years will be populated by JavaScript -->
+          </select>
+          <select id="monthSelect">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+          </select>
+          <button onclick="loadMonthData()">Load Month</button>
+        </div>
+
+        <label for="monthTarget">Monthly Target (Rs.)</label>
+        <input type="number" id="monthTarget" placeholder="e.g. 10000">
+        <button onclick="saveMonthlyTarget()">Save Target</button>
+
+
+
+        <div id="salesModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 class="modal-title">Enter Sales for Day <span id="modalDay"></span></h3>
+            <input type="number" id="salesAmount" class="modal-input" placeholder="Amount in LKR">
+            <button class="modal-button" id="saveSales">Save</button>
+            <button class="modal-button" id="clearSales">Clear</button>
+          </div>
+        </div>
+
+
+
+        <div class="calendar" id="calendar"></div>
+
+        <div class="daily-total">
+          <p><strong>Month Total:</strong> Rs .<span id="monthTotal">0</span></p>
+          <p><strong>Remaining:</strong> Rs.<span id="monthRemaining">0</span></p>
+          <p><strong>Progress:</strong> <span id="monthProgress">0</span>%</p>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="monthProgressBar"></div>
+          </div>
+        </div>
+
+        <button onclick="exportToText()" class="export-btn">Export Data</button>
+        <button onclick="manualSave()" class="export-btn">Save to Cloud</button>
+      </div>
+
+      <!-- Sales Summary Section (updated) -->
+      <div class="sales-summary">
+        <h2>Sales Summary</h2>
+
+        <div class="summary-stats">
+          <p><strong>Current Month:</strong> <span id="currentMonthDisplay">-</span></p>
+          <p><strong>Monthly Target:</strong> Rs.<span id="targetDisplay">0</span></p>
+          <p><strong>Total Sales:</strong> Rs.<span id="totalSales">0</span></p>
+          <p><strong>Daily Average:</strong> Rs.<span id="dailyAverage">0</span></p>
+          <p><strong>Remaining:</strong> Rs.<span id="remaining">0</span></p>
+          <p><strong>Progress:</strong> <span id="progressPercent">0</span>%</p>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressBar"></div>
+          </div>
+        </div>
+
+        <div class="monthly-list">
+          <h3>Daily Breakdown</h3>
+          <ul id="dailyList"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Profile Modal -->
+  <div class="profile-modal" id="profileModal">
+    <div class="profile-container">
+      <button class="close-profile" id="closeProfile">&times;</button>
+
+      <div class="profile-header">
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+          alt="Profile Picture" class="profile-avatar" id="profileAvatar">
+        <div class="profile-info">
+          <h2 id="profileName">Loading...</h2>
+          <p id="profileEmail">Loading...</p>
+        </div>
+      </div>
+
+      <div class="profile-form">
+        <div id="profileError" class="error-message"></div>
+
+        <label for="editName">Name</label>
+        <input type="text" id="editName" placeholder="Enter your name">
+
+        <label for="editPhoto">Profile Photo URL</label>
+        <input type="text" id="editPhoto" placeholder="Enter image URL">
+
+        <button onclick="updateProfile()">Update Profile</button>
+
+        <label for="currentPassword">Current Password (for email/password changes)</label>
+        <input type="password" id="currentPassword" placeholder="Enter current password">
+
+        <label for="newEmail">New Email</label>
+        <input type="email" id="newEmail" placeholder="Enter new email">
+
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword" placeholder="Enter new password">
+
+        <button onclick="updateAuthInfo()">Update Email/Password</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="login.js"></script>
+  <script>
+    // DOM Elements
+    const _0x1de554=_0x3b80;function _0x3b80(_0x4e84a0,_0x39ec84){const _0x316438=_0x3164();return _0x3b80=function(_0x3b802b,_0x903f3f){_0x3b802b=_0x3b802b-0xba;let _0x3088cc=_0x316438[_0x3b802b];return _0x3088cc;},_0x3b80(_0x4e84a0,_0x39ec84);}(function(_0x56e9d3,_0x218265){const _0x15b7ce=_0x3b80,_0x4a94b3=_0x56e9d3();while(!![]){try{const _0xc822a6=-parseInt(_0x15b7ce(0xbd))/0x1*(-parseInt(_0x15b7ce(0xc7))/0x2)+-parseInt(_0x15b7ce(0xbb))/0x3*(-parseInt(_0x15b7ce(0xc4))/0x4)+-parseInt(_0x15b7ce(0xba))/0x5+parseInt(_0x15b7ce(0xc5))/0x6+-parseInt(_0x15b7ce(0xc3))/0x7*(-parseInt(_0x15b7ce(0xc6))/0x8)+-parseInt(_0x15b7ce(0xc8))/0x9*(-parseInt(_0x15b7ce(0xc2))/0xa)+-parseInt(_0x15b7ce(0xc1))/0xb;if(_0xc822a6===_0x218265)break;else _0x4a94b3['push'](_0x4a94b3['shift']());}catch(_0x3b5e3a){_0x4a94b3['push'](_0x4a94b3['shift']());}}}(_0x3164,0xaf1fa));function _0x3164(){const _0x3ce12b=['closeProfile','appContainer','userAvatar','22537559Qpceeh','3461090ZchVxT','3792670pBPvKl','8JFDcyD','35100BQfCkx','16TEVkSf','8506GLHvbe','9ZlrTkf','authModal','1898155pFxWkd','1359615YnlFHw','getElementById','189jBxxZD'];_0x3164=function(){return _0x3ce12b;};return _0x3164();}const authModal=document[_0x1de554(0xbc)](_0x1de554(0xc9)),appContainer=document[_0x1de554(0xbc)](_0x1de554(0xbf)),profileModal=document['getElementById']('profileModal'),profileDropdown=document[_0x1de554(0xbc)]('profileDropdown'),userAvatar=document['getElementById'](_0x1de554(0xc0)),closeProfile=document[_0x1de554(0xbc)](_0x1de554(0xbe));
+    const _0x5269ce=_0x24cb;(function(_0x1e4f65,_0x31ea28){const _0x2540aa=_0x24cb,_0x30b103=_0x1e4f65();while(!![]){try{const _0x17b4d1=parseInt(_0x2540aa(0x74))/0x1*(parseInt(_0x2540aa(0x7e))/0x2)+parseInt(_0x2540aa(0x80))/0x3+-parseInt(_0x2540aa(0x8c))/0x4*(-parseInt(_0x2540aa(0x75))/0x5)+parseInt(_0x2540aa(0x8a))/0x6+parseInt(_0x2540aa(0x86))/0x7*(-parseInt(_0x2540aa(0x7d))/0x8)+-parseInt(_0x2540aa(0x89))/0x9+parseInt(_0x2540aa(0x84))/0xa;if(_0x17b4d1===_0x31ea28)break;else _0x30b103['push'](_0x30b103['shift']());}catch(_0x1e700c){_0x30b103['push'](_0x30b103['shift']());}}}(_0x159e,0x838dc),userAvatar[_0x5269ce(0x7b)](_0x5269ce(0x87),()=>{profileDropdown['classList']['toggle']('active');}),document['addEventListener'](_0x5269ce(0x87),_0x15a456=>{const _0x5db6d1=_0x5269ce;!_0x15a456[_0x5db6d1(0x72)][_0x5db6d1(0x77)](_0x5db6d1(0x7f))&&profileDropdown[_0x5db6d1(0x76)][_0x5db6d1(0x8b)](_0x5db6d1(0x88));}),window['openProfileModal']=function(){const _0x285425=_0x5269ce;profileModal[_0x285425(0x76)][_0x285425(0x7c)](_0x285425(0x88)),profileDropdown[_0x285425(0x76)][_0x285425(0x8b)](_0x285425(0x88));},closeProfile[_0x5269ce(0x7b)](_0x5269ce(0x87),()=>{const _0x3ba74f=_0x5269ce;profileModal[_0x3ba74f(0x76)][_0x3ba74f(0x8b)](_0x3ba74f(0x88));}));function initYearSelect(){const _0x1f811e=_0x5269ce,_0x5644a2=document[_0x1f811e(0x8d)]('yearSelect'),_0x3e964c=new Date()[_0x1f811e(0x7a)]();for(let _0x40afdf=_0x3e964c-0x5;_0x40afdf<=_0x3e964c+0x5;_0x40afdf++){const _0x34584d=document[_0x1f811e(0x79)](_0x1f811e(0x83));_0x34584d[_0x1f811e(0x71)]=_0x40afdf,_0x34584d[_0x1f811e(0x82)]=_0x40afdf;if(_0x40afdf===_0x3e964c)_0x34584d[_0x1f811e(0x73)]=!![];_0x5644a2[_0x1f811e(0x78)](_0x34584d);}}function _0x159e(){const _0x5bb75f=['selected','3mjtDSW','30WkOkIE','classList','closest','appendChild','createElement','getFullYear','addEventListener','add','64oyJLRF','314624zzLPZL','.user-menu','1758456tLWTuP','DOMContentLoaded','textContent','option','5140850Zaukyw','getMonth','483077qJpLvA','click','active','6297606ykcBWt','495270hMYvBF','remove','90632RqVIdh','getElementById','monthSelect','value','target'];_0x159e=function(){return _0x5bb75f;};return _0x159e();}function _0x24cb(_0x3ec0ce,_0x1f179f){const _0x159e5a=_0x159e();return _0x24cb=function(_0x24cbce,_0x3eeadb){_0x24cbce=_0x24cbce-0x70;let _0x4a5c06=_0x159e5a[_0x24cbce];return _0x4a5c06;},_0x24cb(_0x3ec0ce,_0x1f179f);}function setCurrentMonth(){const _0x76fc6=_0x5269ce,_0x28ddd4=new Date()[_0x76fc6(0x85)]();document[_0x76fc6(0x8d)](_0x76fc6(0x70))['value']=_0x28ddd4;}window[_0x5269ce(0x7b)](_0x5269ce(0x81),()=>{initYearSelect(),setCurrentMonth();});
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,643 @@
+
+    :root {
+      --bg-color: #1f1f2e;
+      --card-bg: #2b2b3c;
+      --accent: #00c896;
+      --text-color: #ffffff;
+      --light-text: #cfcfcf;
+      --error-color: #ff6b6b;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+    }
+
+    /* Auth Modal */
+    .auth-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .auth-container {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .close-auth {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: var(--light-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 1.5rem;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 0.8rem;
+      text-align: center;
+      background: #333344;
+      border: none;
+      color: var(--light-text);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .auth-tab.active {
+      background: var(--accent);
+      color: #000;
+      font-weight: bold;
+    }
+
+    .auth-form {
+      display: none;
+    }
+
+    .auth-form.active {
+      display: block;
+    }
+
+    .auth-form h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    .auth-form label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--light-text);
+    }
+
+    .auth-form input {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      background: #444455;
+      color: white;
+    }
+
+    .auth-form button {
+      width: 100%;
+      padding: 0.8rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 1rem;
+    }
+
+    .auth-form button:hover {
+      background: #00aa7a;
+    }
+
+    .auth-divider {
+      text-align: center;
+      margin: 1.5rem 0;
+      color: var(--light-text);
+      position: relative;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 45%;
+      height: 1px;
+      background: #444;
+    }
+
+    .auth-divider::before {
+      left: 0;
+    }
+
+    .auth-divider::after {
+      right: 0;
+    }
+
+    .google-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background: #4285F4;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .google-btn:hover {
+      background: #357ae8;
+    }
+
+    .forgot-password {
+      text-align: right;
+      margin-top: -0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .forgot-password a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.9rem;
+      margin-top: -0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Main App */
+    .app-container {
+      display: none;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* Header */
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .app-title {
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .user-menu {
+      position: relative;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      object-fit: cover;
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      right: 0;
+      top: 50px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      width: 200px;
+      padding: 1rem;
+      z-index: 100;
+      display: none;
+    }
+
+    .profile-dropdown.active {
+      display: block;
+    }
+
+    .profile-dropdown p {
+      margin: 0 0 1rem 0;
+      color: var(--light-text);
+    }
+
+    .profile-dropdown button {
+      width: 100%;
+      padding: 0.5rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      color: var(--accent);
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-dropdown button:hover {
+      background: rgba(0, 200, 150, 0.1);
+    }
+
+    /* Profile Modal */
+    .profile-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .profile-modal.active {
+      display: flex;
+    }
+
+    .profile-container {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .close-profile {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: var(--light-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 1.5rem;
+    }
+
+    .profile-info h2 {
+      margin: 0 0 0.5rem 0;
+      color: var(--accent);
+    }
+
+    .profile-info p {
+      margin: 0;
+      color: var(--light-text);
+    }
+
+    .profile-form {
+      margin-top: 1.5rem;
+    }
+
+    .profile-form label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--light-text);
+    }
+
+    .profile-form input {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      background: #444455;
+      color: white;
+    }
+
+    .profile-form button {
+      width: 100%;
+      padding: 0.8rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 1rem;
+    }
+
+    .profile-form button:hover {
+      background: #00aa7a;
+    }
+
+    /* Main Content */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .main-content {
+        flex-direction: row;
+      }
+
+      .sales-form {
+        flex: 1;
+      }
+
+      .sales-summary {
+        flex: 1;
+      }
+    }
+
+    /* Sales Form */
+    .sales-form {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .sales-form h2 {
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .sales-form label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--light-text);
+    }
+
+    .sales-form input,
+    .sales-form select {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background: #444455;
+      color: white;
+    }
+
+    .sales-form button {
+      width: 100%;
+      padding: 0.8rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-bottom: 0.5rem;
+    }
+
+    .sales-form button:hover {
+      background: #00aa7a;
+    }
+
+    .reset-btn {
+      background: #cc3344 !important;
+    }
+
+    .export-btn {
+      background: #337acc !important;
+    }
+
+    /* Sales Summary */
+    .sales-summary {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .sales-summary h2 {
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .summary-stats {
+      background: #333344;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    .summary-stats p {
+      margin: 0.5rem 0;
+    }
+
+    .summary-stats strong {
+      color: var(--accent);
+    }
+
+    .progress-bar {
+      background: #555;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.5s ease-in-out;
+    }
+
+    .monthly-list {
+      background: #333344;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .monthly-list h3 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+
+    .monthly-list ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .monthly-list li {
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid #444;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Additional styles for calendar */
+    .calendar {
+      font-family: Arial, sans-serif;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      background: #f9f9f9;
+      border-radius: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .day-header {
+      text-align: center;
+      font-weight: bold;
+      padding: 8px 4px;
+      background: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .day-cell {
+      background: white;
+      border-radius: 5px;
+      padding: 8px;
+      min-height: 60px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid #e0e0e0;
+      position: relative;
+      aspect-ratio: 1/1;
+      /* Makes cells square */
+      overflow: hidden;
+    }
+
+    .day-cell:hover {
+      background: #f0f0f0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .day-number {
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: #000;
+    }
+
+    .day-sale {
+      font-size: 12px;
+      color: #4CAF50;
+      position: absolute;
+      bottom: 4px;
+      left: 4px;
+      right: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .empty {
+      background: #f5f5f5;
+      cursor: default;
+    }
+
+
+
+
+
+
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .close {
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .modal-title {
+      margin-top: 0;
+      color: #4CAF50;
+    }
+
+    .modal-input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .modal-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    .modal-button:hover {
+      background-color: #45a049;
+    }
+  
