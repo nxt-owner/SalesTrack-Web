@@ -7,28 +7,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Tech Lasiya | techlasiya.com" />
-  <meta name="description"
-    content="Track your daily sales progress and monthly targets easily with the Sales Target Tracker app." />
-  <meta name="keywords"
-    content="sales tracker, monthly sales, target tracking, daily sales log, sales app, productivity" />
+  <meta name="description" content="Track your daily sales progress and monthly targets easily with the Sales Target Tracker app." />
+  <meta name="keywords" content="sales tracker, monthly sales, target tracking, daily sales log, sales app, productivity" />
   <meta name="theme-color" content="#4CAF50" />
   <link rel="icon" type="image/png" href="favicon.png">
   <meta property="og:title" content="Sales Target Tracker - Stay on Top of Your Goals" />
   <meta property="og:description" content="Achieve your sales goals with this easy-to-use sales tracking app." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mysalesapp.techlasiya.com/" />
-  <meta property="og:image"
-    content="https://raw.githubusercontent.com/nxt-owner/SalesTrack-Web/refs/heads/main/og.png" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/nxt-owner/SalesTrack-Web/refs/heads/main/og.png" />
 
-  <meta http-equiv="Content-Security-Policy" content="frame-src https://salseapp-4de3b.firebaseapp.com 
+  <meta http-equiv="Content-Security-Policy" 
+      content="frame-src https://salseapp-4de3b.firebaseapp.com 
                https://*.firebaseapp.com 
                https://*.firebase.com;
                child-src 'self' https://*.firebaseapp.com;">
 
   <link rel="canonical" href="https://mysalesapp.techlasiya.com/" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 
-  <link rel="stylesheet" href="styles.css">
   <title>Sales Target Tracker - Stay on Top of Your Monthly Sales</title>
 </head>
 
@@ -139,8 +137,6 @@
         <input type="number" id="monthTarget" placeholder="e.g. 10000">
         <button onclick="saveMonthlyTarget()">Save Target</button>
 
-
-
         <div id="salesModal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
@@ -150,8 +146,6 @@
             <button class="modal-button" id="clearSales">Clear</button>
           </div>
         </div>
-
-
 
         <div class="calendar" id="calendar"></div>
 
@@ -192,7 +186,6 @@
     </div>
   </div>
 
-
   <!-- Profile Modal -->
   <div class="profile-modal" id="profileModal">
     <div class="profile-container">
@@ -231,31 +224,20 @@
       </div>
     </div>
   </div>
-  <!-- 
-  =====================================================
-  Copyright © 2025 Tech Lasiya
-  All Rights Reserved.
-  Website: https://techlasiya.com
-  Unauthorized copying or distribution is prohibited.
-  =====================================================
--->
   <script type="module" src="login.js"></script>
-  <script>
-    // DOM Elements
-   const _0x104080=_0x284f;(function(_0x59724a,_0x3fe067){const _0x42e840=_0x284f,_0x461840=_0x59724a();while(!![]){try{const _0x5daed3=-parseInt(_0x42e840(0x1dc))/0x1+parseInt(_0x42e840(0x1c1))/0x2+parseInt(_0x42e840(0x1d0))/0x3+parseInt(_0x42e840(0x1c9))/0x4*(parseInt(_0x42e840(0x1c8))/0x5)+parseInt(_0x42e840(0x1cb))/0x6+-parseInt(_0x42e840(0x1d6))/0x7*(parseInt(_0x42e840(0x1d5))/0x8)+parseInt(_0x42e840(0x1d3))/0x9;if(_0x5daed3===_0x3fe067)break;else _0x461840['push'](_0x461840['shift']());}catch(_0x1a25d8){_0x461840['push'](_0x461840['shift']());}}}(_0x4b20,0x5f93c));const authModal=document['getElementById']('authModal'),appContainer=document[_0x104080(0x1ca)](_0x104080(0x1ce)),profileModal=document[_0x104080(0x1ca)](_0x104080(0x1bf)),profileDropdown=document[_0x104080(0x1ca)]('profileDropdown'),userAvatar=document[_0x104080(0x1ca)](_0x104080(0x1c6)),closeProfile=document[_0x104080(0x1ca)]('closeProfile');function _0x284f(_0x1612c9,_0x50a29a){const _0x4b2094=_0x4b20();return _0x284f=function(_0x284f5c,_0x5d6d7e){_0x284f5c=_0x284f5c-0x1bf;let _0x2aefd5=_0x4b2094[_0x284f5c];return _0x2aefd5;},_0x284f(_0x1612c9,_0x50a29a);}userAvatar[_0x104080(0x1c0)](_0x104080(0x1c4),()=>{const _0xf7c1ba=_0x104080;profileDropdown[_0xf7c1ba(0x1dd)][_0xf7c1ba(0x1cf)](_0xf7c1ba(0x1d2));}),document[_0x104080(0x1c0)](_0x104080(0x1c4),_0x11be7f=>{const _0x825fda=_0x104080;!_0x11be7f['target'][_0x825fda(0x1c7)](_0x825fda(0x1d4))&&profileDropdown[_0x825fda(0x1dd)]['remove'](_0x825fda(0x1d2));}),window[_0x104080(0x1cc)]=function(){const _0x15e8ab=_0x104080;profileModal[_0x15e8ab(0x1dd)][_0x15e8ab(0x1c3)](_0x15e8ab(0x1d2)),profileDropdown[_0x15e8ab(0x1dd)][_0x15e8ab(0x1cd)](_0x15e8ab(0x1d2));},closeProfile['addEventListener']('click',()=>{const _0x215f39=_0x104080;profileModal[_0x215f39(0x1dd)][_0x215f39(0x1cd)](_0x215f39(0x1d2));});function initYearSelect(){const _0x401f9d=_0x104080,_0x1288cc=document[_0x401f9d(0x1ca)](_0x401f9d(0x1db)),_0x5d5dc8=new Date()[_0x401f9d(0x1d9)]();for(let _0x1a2227=_0x5d5dc8-0x5;_0x1a2227<=_0x5d5dc8+0x5;_0x1a2227++){const _0x530904=document[_0x401f9d(0x1d8)](_0x401f9d(0x1c5));_0x530904[_0x401f9d(0x1d1)]=_0x1a2227,_0x530904[_0x401f9d(0x1de)]=_0x1a2227;if(_0x1a2227===_0x5d5dc8)_0x530904[_0x401f9d(0x1d7)]=!![];_0x1288cc['appendChild'](_0x530904);}}function setCurrentMonth(){const _0x9ff777=_0x104080,_0x3ced9b=new Date()[_0x9ff777(0x1da)]();document[_0x9ff777(0x1ca)](_0x9ff777(0x1c2))['value']=_0x3ced9b;}function _0x4b20(){const _0x5d6119=['appContainer','toggle','451653dDzfrl','value','active','1658889aFudcR','.user-menu','4072MPLnXr','8561MWgkrs','selected','createElement','getFullYear','getMonth','yearSelect','561455tmsBkf','classList','textContent','DOMContentLoaded','profileModal','addEventListener','1063674CayXDo','monthSelect','add','click','option','userAvatar','closest','135pPeCdY','89372yEainA','getElementById','632856rlslia','openProfileModal','remove'];_0x4b20=function(){return _0x5d6119;};return _0x4b20();}window['addEventListener'](_0x104080(0x1df),()=>{initYearSelect(),setCurrentMonth();});
-  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-N10KDJ93BV"></script>
   <script>
-var _0x488162=_0x31a9;function _0x31a9(_0x114cd3,_0x46d690){var _0x20282a=_0x2028();return _0x31a9=function(_0x31a9bb,_0x4b1a66){_0x31a9bb=_0x31a9bb-0x13a;var _0x241e07=_0x20282a[_0x31a9bb];return _0x241e07;},_0x31a9(_0x114cd3,_0x46d690);}(function(_0x2de72b,_0x217671){var _0x1e7e71=_0x31a9,_0x13e71c=_0x2de72b();while(!![]){try{var _0x58090f=-parseInt(_0x1e7e71(0x13f))/0x1*(-parseInt(_0x1e7e71(0x13a))/0x2)+parseInt(_0x1e7e71(0x140))/0x3+parseInt(_0x1e7e71(0x144))/0x4+parseInt(_0x1e7e71(0x13d))/0x5+parseInt(_0x1e7e71(0x13b))/0x6*(-parseInt(_0x1e7e71(0x13c))/0x7)+-parseInt(_0x1e7e71(0x146))/0x8+parseInt(_0x1e7e71(0x145))/0x9*(-parseInt(_0x1e7e71(0x142))/0xa);if(_0x58090f===_0x217671)break;else _0x13e71c['push'](_0x13e71c['shift']());}catch(_0x3988cb){_0x13e71c['push'](_0x13e71c['shift']());}}}(_0x2028,0xd31ca),window[_0x488162(0x141)]=window[_0x488162(0x141)]||[]);function gtag(){var _0x255cff=_0x488162;dataLayer[_0x255cff(0x143)](arguments);}gtag('js',new Date()),gtag(_0x488162(0x13e),'G-N10KDJ93BV');function _0x2028(){var _0x461da4=['20153655bTGCjD','1891688fiLBOl','4iJHrRR','2382DmyBbK','5537sSADZC','7169405CxdzQq','config','77189SfzOBt','3571365nZXomP','dataLayer','10iFTodg','push','3503132ntJAnE'];_0x2028=function(){return _0x461da4;};return _0x2028();}
+   function _0x24d7(_0x1076d6,_0x417a67){var _0x34269b=_0x3426();return _0x24d7=function(_0x24d75f,_0x1c8ee6){_0x24d75f=_0x24d75f-0x170;var _0x227e83=_0x34269b[_0x24d75f];return _0x227e83;},_0x24d7(_0x1076d6,_0x417a67);}var _0x1244be=_0x24d7;(function(_0x1dc979,_0x129b04){var _0xfb0882=_0x24d7,_0x4c7c36=_0x1dc979();while(!![]){try{var _0x329959=parseInt(_0xfb0882(0x172))/0x1*(parseInt(_0xfb0882(0x17c))/0x2)+parseInt(_0xfb0882(0x17f))/0x3*(parseInt(_0xfb0882(0x178))/0x4)+parseInt(_0xfb0882(0x180))/0x5*(parseInt(_0xfb0882(0x176))/0x6)+-parseInt(_0xfb0882(0x175))/0x7*(parseInt(_0xfb0882(0x170))/0x8)+-parseInt(_0xfb0882(0x17e))/0x9+parseInt(_0xfb0882(0x177))/0xa*(-parseInt(_0xfb0882(0x17a))/0xb)+-parseInt(_0xfb0882(0x179))/0xc*(-parseInt(_0xfb0882(0x171))/0xd);if(_0x329959===_0x129b04)break;else _0x4c7c36['push'](_0x4c7c36['shift']());}catch(_0x1a4733){_0x4c7c36['push'](_0x4c7c36['shift']());}}}(_0x3426,0xc5e37),window[_0x1244be(0x17d)]=window[_0x1244be(0x17d)]||[]);function gtag(){var _0x422575=_0x1244be;dataLayer[_0x422575(0x173)](arguments);}gtag('js',new Date()),gtag(_0x1244be(0x17b),_0x1244be(0x174));function _0x3426(){var _0x2aeded=['37134pXVxun','249235dfNcOs','120dzBPkB','25779opQWpc','466ykHHBA','push','G-N10KDJ93BV','367269UofQyN','66sVuDnR','77800HezivX','80ZyiGHs','4764LmlXzp','1452LmdVTl','config','4848RQtqgK','dataLayer','793764UuRLLD'];_0x3426=function(){return _0x2aeded;};return _0x3426();}
   </script>
 </body>
+
 <footer class="app-footer">
   <div class="footer-content">
     <div class="footer-section">
       <h3>Sales Tracker</h3>
       <p>Track and manage your daily sales performance</p>
     </div>
-
+    
     <div class="footer-section">
       <h3>My Projects</h3>
       <a href="https://www.techlasiya.com" target="_blank" class="project-link">
@@ -264,7 +246,7 @@ var _0x488162=_0x31a9;function _0x31a9(_0x114cd3,_0x46d690){var _0x20282a=_0x202
         </button>
       </a>
     </div>
-
+    
     <div class="footer-section">
       <h3>Connect</h3>
       <div class="social-links">
@@ -274,11 +256,10 @@ var _0x488162=_0x31a9;function _0x31a9(_0x114cd3,_0x46d690){var _0x20282a=_0x202
       </div>
     </div>
   </div>
-
+  
   <div class="footer-bottom">
     <p>&copy; 2023 <a href="https://www.techlasiya.com">TechLasiya</a>. All rights reserved.</p>
     <p>Sales Tracker v1.0.0</p>
   </div>
 </footer>
-
 </html>

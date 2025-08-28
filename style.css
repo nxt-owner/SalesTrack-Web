@@ -1,4 +1,4 @@
-
+/* Global Styles */
     :root {
       --bg-color: #1f1f2e;
       --card-bg: #2b2b3c;
@@ -7,7 +7,6 @@
       --light-text: #cfcfcf;
       --error-color: #ff6b6b;
     }
-
 
     * {
       box-sizing: border-box;
@@ -579,12 +578,6 @@
       cursor: default;
     }
 
-
-
-
-
-
-
     .modal {
       display: none;
       position: fixed;
@@ -640,91 +633,98 @@
     .modal-button:hover {
       background-color: #45a049;
     }
-  
-/* Footer */
+
+    .calendar-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .calendar-controls select, 
+    .calendar-controls button {
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: 1px solid #444455;
+      background: #444455;
+      color: white;
+    }
+
+    .calendar-controls button {
+      background: var(--accent);
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .daily-total {
+      background: #333344;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
 
     .app-footer {
-      background-color: #2c3e50;
-      color: #ecf0f1;
-      padding: 2rem 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--card-bg);
+      color: var(--light-text);
+      padding: 2rem 1rem;
       margin-top: 2rem;
     }
-    
+
     .footer-content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
     }
-    
+
     .footer-section {
       flex: 1;
-      min-width: 250px;
-      margin: 1rem;
-      padding: 1rem;
+      min-width: 200px;
     }
-    
+
     .footer-section h3 {
-      color: #4CAF50;
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
+      color: var(--accent);
+      margin-top: 0;
     }
-    
-    .footer-button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background-color 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .footer-button:hover {
-      background-color: #3e8e41;
-    }
-    
+
     .project-link {
       text-decoration: none;
     }
-    
+
+    .footer-button {
+      background: #444455;
+      border: none;
+      color: var(--light-text);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
     .social-links {
       display: flex;
       gap: 1rem;
-      margin-top: 1rem;
     }
-    
+
     .social-icon {
-      color: #ecf0f1;
+      color: var(--light-text);
       font-size: 1.5rem;
-      transition: color 0.3s;
     }
-    
-    .social-icon:hover {
-      color: #4CAF50;
-    }
-    
+
     .footer-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0;
       text-align: center;
-      padding-top: 1.5rem;
-      margin-top: 1.5rem;
-      border-top: 1px solid #34495e;
-      font-size: 0.9rem;
+      padding-top: 1rem;
+      border-top: 1px solid #444455;
     }
-    
+
     .footer-bottom a {
-      color: #4CAF50;
+      color: var(--accent);
       text-decoration: none;
     }
-    
-    .footer-bottom a:hover {
-      text-decoration: underline;
-    }
-    
